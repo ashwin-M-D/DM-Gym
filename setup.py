@@ -7,7 +7,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'dm_gym'))
 
 setup(name='dm-gym',
-      version='0.1Beta',
+      version='0.1.2_Beta',
       description='DM-Gym: A set of environments for developing reinforcement learning agents for Data Mining problems.',
       author='Ashwin M Devanga',
       license='BSD 3-Clause',
