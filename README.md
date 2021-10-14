@@ -1,3 +1,9 @@
+---
+useMath: true
+---
+
+
+
 # DM-Gym
 
 Data Mining Gym Environment for Reinforcement Learning
@@ -35,8 +41,6 @@ cd ..
 cd experiments
 ```
 
-
-
 ### Available Environments
 
 1. Clustering:
@@ -45,13 +49,17 @@ cd experiments
 
    Basically the input / state space is a single record from the dataset and the output is a discreet variable which is an integer between 0 and k-1, each specifying a specific cluster.
 
-   * Clustering-v0: Reward function is based on distance from the centroids
-   * Clustering-v1: Reward function is negative of db-index
-   * Clustering-v2: Reward function is based on distance and also number of points in each cluster
-   * Clustering-v3: Reward function is based on db-index but is only received in the end of each episode. i.e one the environment goes through the entire dataset.
-   * Clustering-v4: Reward function is based on both the distance and also the db-index.
+   - Clustering-v0: Reward function is negative of log(db-index)
 
-### Environments planned in the future
+     ![Reward Function for Clustering-v0](./images/clustering_v0.png)
+
+   - Clustering-v1: Reward function is based on both the distance and also the db-index.
+
+     ![Reward Function for Clustering-v0](./images/clustering_v1.png)
+
+   Using Clustering-v0 is recommended for small number of clusters. Please use Clustering-v1 if you have a large number of clusters. An improved clustering environment will be released soon.
+
+### Environments planned for the future
 
 1. Classification
 2. Linear Regression

@@ -1,26 +1,55 @@
 import numpy as np
 import pandas as pd
 
+import math
+
 from copy import deepcopy
 from sklearn.metrics import davies_bouldin_score as dbindex
 
 
 class Reward_Function:
 
-    def __init__(self):
+    def __init__(self, max_dist):
+        self.max_dist = max_dist
         pass
 
-    def reward_function(self, df, k):
+    def reward_function(self, df, k, total_data_size, obs, action, done):
         reward = 0
+
+        centroids = self.gen_mean_coords(df, k)
 
         num_clusters = len(df['action'].unique().tolist())
 
-        try:
-            accuracy = dbindex(df[df.columns.drop('action')], df['action'])
-        except:
-            accuracy = 1e+10
+        if(done == True):
 
-        reward = -accuracy + (num_clusters - k)
+            num_clusters = len(df['action'].unique().tolist())
+
+            num_in_clusters = df['action'].value_counts().to_list()
+            for i in range(k - num_clusters):
+                num_in_clusters.append(0)
+
+            max_val = np.prod(num_in_clusters)/total_data_size**k
+
+            if num_clusters == k:
+                accuracy = dbindex(df[df.columns.drop('action')], df['action'])
+            else:
+                accuracy = 1e+10
+
+            reward = - 2 * math.log10(accuracy) - \
+                k**(-k)/(1 + max_val)
+
+        else:
+            dist = np.linalg.norm(np.array(obs) -
+                                  np.array(centroids[action-1]))
+
+            accuracy = dist / self.max_dist
+
+            reward = 0
+
+        if reward > 1000:
+            reward = 1000
+        elif reward < -1000:
+            reward = -1000
 
         return reward, accuracy
 
@@ -50,4 +79,5 @@ class Reward_Function:
                 dist_temp.append(np.linalg.norm(c-d))
             dist[j] = dist_temp
         df['centroid'] = dist.idxmin(axis=1)
+        df['distance'] = dist.min(axis=1)
         return df

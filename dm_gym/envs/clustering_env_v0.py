@@ -27,7 +27,7 @@ class ClusteringEnv_0(gym.Env):
 
         self.R = Reward_Function()
 
-        self.reward_range = (-np.inf, np.inf)
+        self.reward_range = (-1000, 1000)
 
         min_val = self.data.min().tolist()
         max_val = self.data.max().tolist()
@@ -72,7 +72,7 @@ class ClusteringEnv_0(gym.Env):
             done = False
 
         reward, accuracy = self.R.reward_function(
-            self.final_state_data, self.k, self.total_data_size, obs, action, done)
+            self.final_state_data, self.k)
 
         self.prev_obs = obs
 

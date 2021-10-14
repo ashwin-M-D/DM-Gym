@@ -25,9 +25,7 @@ class ClusteringEnv_1(gym.Env):
 
         self.total_data_size = len(self.data.index)
 
-        self.R = Reward_Function()
-
-        self.reward_range = (-np.inf, np.inf)
+        self.reward_range = (-1000, 1000)
 
         min_val = self.data.min().tolist()
         max_val = self.data.max().tolist()
@@ -35,7 +33,11 @@ class ClusteringEnv_1(gym.Env):
         min_val = [x-1 for x in min_val]
         max_val = [x+1 for x in max_val]
 
+        max_dist = np.linalg.norm(np.array(max_val)-np.array(min_val))
+
         self.action_space = spaces.Discrete(self.k)
+
+        self.R = Reward_Function(max_dist)
 
         self.observation_space = spaces.Box(low=np.array(
             min_val), high=np.array(max_val), dtype=np.float64)
@@ -72,7 +74,7 @@ class ClusteringEnv_1(gym.Env):
             done = False
 
         reward, accuracy = self.R.reward_function(
-            self.final_state_data, self.k)
+            self.final_state_data, self.k, self.total_data_size, obs, action, done)
 
         self.prev_obs = obs
 
