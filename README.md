@@ -1,9 +1,3 @@
----
-useMath: true
----
-
-
-
 # DM-Gym
 
 Data Mining Gym Environment for Reinforcement Learning
