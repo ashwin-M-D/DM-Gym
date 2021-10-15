@@ -4,10 +4,12 @@ from setuptools import setup, find_packages
 import sys
 import os
 
+from dm_gym.version import VERSION
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'dm_gym'))
 
 setup(name='dm-gym',
-      version='0.1.3_Beta',
+      version=VERSION,
       description='DM-Gym: A set of environments for developing reinforcement learning agents for Data Mining problems.',
       author='Ashwin M Devanga',
       author_email='devanga.a@northeastern.edu',

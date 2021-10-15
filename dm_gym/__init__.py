@@ -1,6 +1,7 @@
-from gym.envs.registration import register
+from dm_gym.create_env import *
+from dm_gym.env_conf import *
+from dm_gym.version import *
+from dm_gym.envs.register import *
 
-register(id='clustering-v0', entry_point='dm_gym.envs:ClusteringEnv_0',)
-register(id='clustering-v1', entry_point='dm_gym.envs:ClusteringEnv_1',)
+from dm_gym.version import VERSION as __version__
 
-#register(id='basic-v2', entry_point='gym_basic.envs:BasicEnv2',)

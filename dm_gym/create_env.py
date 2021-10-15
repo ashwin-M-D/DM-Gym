@@ -1,5 +1,4 @@
-import gym
-
+import dm_gym
 
 def ray_create_env(config, *args, **kwargs):
 
@@ -8,9 +7,11 @@ def ray_create_env(config, *args, **kwargs):
     else:
         env_name = config
     if env_name == 'clustering-v0':
-        from dm_gym.envs.clustering_env_v0 import ClusteringEnv_0 as env
+        from dm_gym.envs.clustering.clustering_env_v0 import ClusteringEnv_0 as env
     elif env_name == 'clustering-v1':
-        from dm_gym.envs.clustering_env_v1 import ClusteringEnv_1 as env
+        from dm_gym.envs.clustering.clustering_env_v1 import ClusteringEnv_1 as env
+    elif env_name == 'clustering-v2':
+        from dm_gym.envs.clustering.clustering_env_v2 import ClusteringEnv_2 as env
     else:
         raise NotImplementedError(
             'Environment {} not recognized.'.format(env_name))
@@ -19,9 +20,11 @@ def ray_create_env(config, *args, **kwargs):
 
 def create_env(name, *args, **kwargs):
     if name == "clustering-v0":
-        env = gym.make("dm_gym:clustering-v0", **kwargs)
+        env = dm_gym.make("dm_gym:clustering-v0", **kwargs)
     elif name == "clustering-v1":
-        env = gym.make("dm_gym:clustering-v1", **kwargs)
+        env = dm_gym.make("dm_gym:clustering-v1", **kwargs)
+    elif name == "clustering-v2":
+        env = dm_gym.make("dm_gym:clustering-v2", **kwargs)
     else:
         raise NotImplementedError(
             'Environment {} not recognized.'.format(name))
