@@ -14,6 +14,13 @@ cd DM-Gym
 pip install -e
 ```
 
+The package is also in the pypi repository so it can be installed using pip.
+
+```bash
+pip install dm-gym
+```
+
+
 ### Testing
 
 To test the environment using the test codes provided, you need to have ray installed. Please use the conda environment file provided to setup your environment. Then, install DM-Gym as mentioned above and proceed with running the python notebooks provided. All of this can be done as follows.
