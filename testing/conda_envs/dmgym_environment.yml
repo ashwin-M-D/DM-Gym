@@ -1,4 +1,4 @@
-name: myenv_ray
+name: myenv_dmgym_testing
 
 channels:
   - pytorch
@@ -14,12 +14,6 @@ dependencies:
   - jupyterlab
   - jupyter
   - notebook
-  - pip
-  - pip:
-      - tensorflow-gpu==2.4.*
-      - ray[default]
-      - ray[rllib]
-      - gputil
   - python=3.8
   - pytorch=1.7
   - tensorboard=2.4
@@ -32,3 +26,9 @@ dependencies:
   - tqdm
   - networkx
   - scipy
+  - pip
+  - pip:
+      - tensorflow-gpu==2.4.*
+      - ray[default]
+      - ray[rllib]
+      - gputil
