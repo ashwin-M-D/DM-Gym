@@ -27,7 +27,7 @@ class ClusteringEnv_2(gym.Env):
 
         self.R = Reward_Function()
 
-        self.reward_range = (-1000, 1000)
+        self.reward_range = (-1, 1)
 
         min_val = self.data.min().tolist()
         max_val = self.data.max().tolist()
@@ -39,7 +39,7 @@ class ClusteringEnv_2(gym.Env):
 
         self.observation_space = spaces.Box(low=np.array(
             min_val), high=np.array(max_val), dtype=np.float64)
-        
+
         self.prototype_centroids = []
         for _ in range(self.k):
             self.prototype_centroids.append(self.observation_space.sample())
@@ -57,10 +57,11 @@ class ClusteringEnv_2(gym.Env):
         self.prev_obs = self.data_env.sample().values.tolist()[0]
 
         return self.prev_obs
-    
+
     def _update_env(self, action):
-        ## Update Centroids
-        self.centroids[action] = self.centroids[action] + self.lr * (self.prev_obs - self.centroids[action])
+        # Update Centroids
+        self.centroids[action] = self.centroids[action] + \
+            self.lr * (self.prev_obs - self.centroids[action])
 
     def step(self, action):
 
