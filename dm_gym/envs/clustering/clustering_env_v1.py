@@ -25,7 +25,7 @@ class ClusteringEnv_1(gym.Env):
 
         self.total_data_size = len(self.data.index)
 
-        self.reward_range = (-1000, 1000)
+        self.reward_range = (-100, 100)
 
         min_val = self.data.min().tolist()
         max_val = self.data.max().tolist()

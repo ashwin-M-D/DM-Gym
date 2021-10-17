@@ -9,7 +9,6 @@ from copy import deepcopy
 
 from dm_gym.env_conf import assign_env_config
 
-#import matplotlib.pyplot as plt
 
 
 class ClusteringEnv_0(gym.Env):

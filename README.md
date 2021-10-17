@@ -20,7 +20,6 @@ The package is also in the pypi repository so it can be installed using pip.
 pip install dm-gym
 ```
 
-
 ### Testing
 
 To test the environment using the test codes provided, you need to have ray installed. Please use the conda environment file provided to setup your environment. Then, install DM-Gym as mentioned above and proceed with running the python notebooks provided. All of this can be done as follows.
@@ -54,12 +53,17 @@ cd experiments
 
      ![Reward Function for Clustering-v0](./images/clustering_v0.png)
 
+     This is a poor performing environment.
+
    - Clustering-v1: Reward function is based on both the distance and also the db-index.
 
      ![Reward Function for Clustering-v0](./images/clustering_v1.png)
-     
-   - Clustering-v2: Uses a different reward system which is either -1 or 1 at each step. Based on the paper "A Reinforcement Learning Approach to Online Clustering" [1]. 
+
+     This performs better than clustering-v0. However, it is suggested to use one of the other 2 clustering environments. 
    
+   - Clustering-v2: Uses a different reward system which is either p-1 or p at each step. Based on the paper "A Reinforcement Learning Approach to Online Clustering" [1]. Please use a low gamma value with this environment for optimal results.
+   
+   - Clustering-v3: This has the best performance among all the clustering environments. It converts the problem into a classification problem internally. However, to showcase true capabilities of RL, this should not be used. Use a low gamma value with this environment.
 
 ### Environments planned for the future
 
@@ -74,11 +78,7 @@ cd experiments
 
 ### References
 
-1. Likas, A., 1999. A reinforcement learning approach to online clustering. *Neural computation*, *11*(8), pp.1915-1932.
-
+1. Likas, A., 1999. A reinforcement learning approach to online clustering. _Neural computation_, _11_(8), pp.1915-1932.
    <a href="http://62.217.125.140/jspui/bitstream/123456789/11133/1/Likas-1999-A%20reinforcement%20learning%20approach%20to%20online%20clustering.pdf">PDF</a>
 
-2. Hubbs, C.D., Perez, H.D., Sarwar, O., Sahinidis, N.V., Grossmann, I.E. and Wassick, J.M., 2020. OR-Gym: A Reinforcement Learning Library for Operations Research Problems. *arXiv preprint arXiv:2008.06319*. <a href="https://arxiv.org/pdf/2008.06319">PDF</a> <a href="https://github.com/hubbs5/or-gym">GitHub</a>
-
-   
-
+2. Hubbs, C.D., Perez, H.D., Sarwar, O., Sahinidis, N.V., Grossmann, I.E. and Wassick, J.M., 2020. OR-Gym: A Reinforcement Learning Library for Operations Research Problems. _arXiv preprint arXiv:2008.06319_. <a href="https://arxiv.org/pdf/2008.06319">PDF</a> <a href="https://github.com/hubbs5/or-gym">GitHub</a>

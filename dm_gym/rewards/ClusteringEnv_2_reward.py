@@ -1,10 +1,6 @@
 import numpy as np
-import pandas as pd
-
 import math
 
-from copy import deepcopy
-from sklearn.metrics import davies_bouldin_score as dbindex
 
 
 class Reward_Function:
@@ -15,16 +11,31 @@ class Reward_Function:
     def reward_function(self, obs, action, centroids):
         reward = 0
 
-        y = self.get_yi(centroids, obs)
+        y_i = self.get_yi(centroids, obs, action)
+        p = self.get_p_i(centroids[action], obs)
 
-        if(y == action):
-            reward = 1
+        '''
+        p_is = []
+        for coords in centroids:
+            p_is.append(self.get_p_i(coords, obs))
+        p_is = np.array(p_is)/sum(p_is)
+
+        p = p_is[action]
+        reward = p
+        '''
+
+        if(y_i == 1):
+            #reward = 1/(y_i-p)
+            #reward = 1
+            reward =  p
         else:
-            reward = -1
-        
-        return reward
+            #reward = -1/(y_i-p)
+            #reward = -1
+            reward = -1*(1-p)
 
-    def get_yi(self, coordinates, obs):
+        return reward, y_i, p
+
+    def get_yi(self, coordinates, obs, action):
         dist = []
         for coor in coordinates:
             c = np.array(coor)
@@ -32,5 +43,16 @@ class Reward_Function:
             dist.append(np.linalg.norm(c-d))
 
         y_i = dist.index(min(dist))
+        if(y_i == action):
+            y_i = 1
+        else:
+            y_i = 0
 
         return y_i
+    
+    def get_p_i(self, coordinates, obs):
+        s_i = np.linalg.norm(np.array(coordinates) - np.array(obs))
+        f_si = 1 / 1 + math.exp(-s_i)
+        p_i = 2 * (1 - f_si)
+        return p_i
+

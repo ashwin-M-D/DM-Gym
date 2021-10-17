@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 
 from sklearn.linear_model import LinearRegression
 from sklearn.cluster import MeanShift
+from sklearn.cluster import KMeans
 
 
 class data_gen_clustering():
@@ -90,6 +91,27 @@ class data_gen_clustering():
         X = data.to_numpy()
 
         model = MeanShift(bandwidth=2)
+
+        reg = model.fit(X)
+        
+        model_labels = reg.labels_
+        
+        final_data = deepcopy(data)
+        final_data['Class'] = model_labels
+        
+        centroids = model.cluster_centers_
+        
+        centroids = [tuple(coords) for coords in centroids]
+            
+        return final_data, centroids
+    
+    def gen_model_Kmeans(self, data, k=2):
+
+        X = data.to_numpy()
+        try:
+            model = KMeans(n_clusters=self.k)
+        except:
+            model = KMeans(n_clusters=k)
 
         reg = model.fit(X)
         

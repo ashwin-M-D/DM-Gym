@@ -2,31 +2,28 @@ import gym
 from gym import spaces
 
 import numpy as np
-from dm_gym.rewards.ClusteringEnv_2_reward import Reward_Function
+from dm_gym.rewards.ClusteringEnv_3_reward import Reward_Function
 from sklearn.utils import shuffle
 from copy import deepcopy
 
 from dm_gym.env_conf import assign_env_config
 
+from dm_gym.utils.data_gen import data_gen_clustering
 
-class ClusteringEnv_2(gym.Env):
+
+
+class ClusteringEnv_3(gym.Env):
 
     """Custom Environment that follows gym interface"""
     metadata = {'render.modes': ['human']}
 
     def __init__(self, *args, **kwargs):
-        super(ClusteringEnv_2, self).__init__()
+        super(ClusteringEnv_3, self).__init__()
 
         assign_env_config(self, kwargs)
-
         self.current_step = 0
 
         self.total_data_size = len(self.data.index)
-
-        try:
-            self.max_steps
-        except:
-            self.max_steps = self.total_data_size
 
         self.R = Reward_Function()
 
@@ -42,48 +39,35 @@ class ClusteringEnv_2(gym.Env):
 
         self.observation_space = spaces.Box(low=np.array(
             min_val), high=np.array(max_val), dtype=np.float64)
-        
-        self.prototype_centroids = []
-        for i in range(self.k):
-            self.prototype_centroids.append(self.observation_space.sample())
-        #self.prototype_centroids = self.data.sample(n=self.k).values.tolist()
-
+        data_gen = data_gen_clustering()
+        _, self.prototype_centroids = data_gen.gen_model_Kmeans(self.data, self.k)
         
         self.centroids = deepcopy(self.prototype_centroids)
 
     def reset(self):
         self.current_step = 0
 
-        #self.centroids = deepcopy(self.prototype_centroids)
-
         self.data_env = deepcopy(self.data)
         self.data_env = shuffle(self.data_env)
         self.data_env.reset_index(inplace=True, drop=True)
 
-        self.prev_obs = self.data_env.sample().values.tolist()[0]
+        self.prev_obs = self.data_env.iloc[self.current_step].tolist()
 
         return self.prev_obs
-
-    def _update_env(self, action, y_i, p_i):
-        # Update Centroids
-        self.centroids[action] = self.centroids[action] + \
-            self.lr * abs(y_i - p_i) * (np.array(self.prev_obs) - np.array(self.centroids[action]))
 
     def step(self, action):
 
         action = int(action)
         self.current_step += 1
 
-        if self.current_step >= self.max_steps:
+        if self.current_step >= self.total_data_size - 1:
             done = True
         else:
             done = False
 
-        reward, y_i, p_i = self.R.reward_function(self.prev_obs, action, self.centroids)
+        reward = self.R.reward_function(self.prev_obs, action, self.centroids)
 
-        self._update_env(action, y_i, p_i)
-        obs = self.data_env.sample().values.tolist()[0]
-
+        obs = self.data_env.iloc[self.current_step].tolist()
         self.prev_obs = obs
 
         return obs, reward, done, {'centroids': self.centroids}

@@ -8,6 +8,11 @@ from dm_gym.version import VERSION
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'dm_gym'))
 
+# read the contents of your README file
+from pathlib import Path
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
+
 setup(name='dm-gym',
       version=VERSION,
       description='DM-Gym: A set of environments for developing reinforcement learning agents for Data Mining problems.',
@@ -16,6 +21,8 @@ setup(name='dm-gym',
       license='BSD 3-Clause',
       url='https://github.com/ashwin-M-D/DM-Gym',
       packages=find_packages(),
+      long_description=long_description,
+      long_description_content_type='text/markdown',
       install_requires=[
           'gym>=0.15.0',
           'numpy>=1.16.1',

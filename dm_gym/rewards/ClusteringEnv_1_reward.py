@@ -46,10 +46,10 @@ class Reward_Function:
 
             reward = 0
 
-        if reward > 1000:
-            reward = 1000
-        elif reward < -1000:
-            reward = -1000
+        if reward > 100:
+            reward = 100
+        elif reward < -100:
+            reward = -100
 
         return reward, accuracy
 
