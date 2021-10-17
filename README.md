@@ -57,7 +57,7 @@ cd experiments
 
    - Clustering-v1: Reward function is based on both the distance and also the db-index.
 
-     ![Reward Function for Clustering-v0](./images/clustering_v1.png)
+     ![Reward Function for Clustering-v1](./images/clustering_v1.png)
 
      This performs better than clustering-v0. However, it is suggested to use one of the other 2 clustering environments. 
    
