@@ -1,0 +1,36 @@
+{
+  "buffer_size": 1,
+  "double_q": true,
+  "env": "clustering-v2",
+  "env_config": {
+    "data": "            1         2\n0    4.840092 -0.826477\n1    6.233228 -0.798812\n2    8.266827  0.078302\n3    5.022069  1.797837\n4    4.640663  0.585615\n..        ...       ...\n145  0.562152  7.323202\n146 -0.132817  3.827176\n147  1.312677  5.295955\n148  1.355226  6.682887\n149 -1.259634  6.364254\n\n[150 rows x 2 columns]",
+    "k": 3,
+    "lr": 0.001,
+    "max_steps": 1000
+  },
+  "evaluation_config": {
+    "explore": false
+  },
+  "exploration_config": {
+    "epsilon_timesteps": 400000.0,
+    "final_epsilon": 0.02,
+    "initial_epsilon": 1.0,
+    "type": "EpsilonGreedy"
+  },
+  "framework": "torch",
+  "gamma": 0.4,
+  "log_level": "ERROR",
+  "lr": 1e-05,
+  "model": {
+    "fcnet_activation": "relu",
+    "fcnet_hiddens": [
+      128,
+      64
+    ],
+    "vf_share_layers": false
+  },
+  "num_gpus": 1,
+  "num_workers": 10,
+  "target_network_update_freq": 500,
+  "train_batch_size": 1
+}
