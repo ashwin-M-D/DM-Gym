@@ -49,32 +49,38 @@ cd experiments
 
    Basically the input / state space is a single record from the dataset and the output is a discreet variable which is an integer between 0 and k-1, each specifying a specific cluster.
 
-   - Clustering-v0: Reward function is negative of log(db-index)
+   - clustering-v0: Reward function is negative of log(db-index)
 
      ![Reward Function for Clustering-v0](./images/clustering_v0.png)
 
      This is a poor performing environment.
 
-   - Clustering-v1: Reward function is based on both the distance and also the db-index.
+   - clustering-v1: Reward function is based on both the distance and also the db-index.
 
      ![Reward Function for Clustering-v1](./images/clustering_v1.png)
 
      This performs better than clustering-v0. However, it is suggested to use one of the other 2 clustering environments. 
    
-   - Clustering-v2: Uses a different reward system which is either p-1 or p at each step. Based on the paper "A Reinforcement Learning Approach to Online Clustering" [1]. Please use a low gamma value with this environment for optimal results.
+   - clustering-v2: Uses a different reward system which is either p-1 or p at each step. Based on the paper "A Reinforcement Learning Approach to Online Clustering" [1]. Please use a low gamma value with this environment for optimal results.
    
-   - Clustering-v3: This has the best performance among all the clustering environments. It converts the problem into a classification problem internally. However, to showcase true capabilities of RL, this should not be used. Use a low gamma value with this environment.
+   - clustering-v3: This has the best performance among all the clustering environments. It converts the problem into a classification problem internally. However, to showcase true capabilities of RL, this should not be used. Use a low gamma value with this environment.
+   
+2. Classification:
+
+   Classification is done by reading a single record at a time and checking the output of your RL agent against the class it belongs to.
+
+   * classification-v0: This has very good performance and the reward function is defined as 1 if the output of the agent and the class it actually belongs to match and -1 if they don't match. It is again recommended to use a low gamma value for this environment.
 
 ### Environments planned for the future
 
-1. Classification
-2. Linear Regression
+2. Linear Regression environments.
+2. More Classification environments.
 
 #### Notes:
 
 1. **See Testing folder to see examples of each of the environments and their outputs**
 
-2. **Documentation for all available functions will be made available soon.**
+2. **Documentation for all available functions is available in the documentation folder. This folder will be updated regularly to make sure there are no ambiguity in the usage of the environments**
 
 ### References
 

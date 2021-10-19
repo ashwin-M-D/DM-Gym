@@ -11,7 +11,6 @@ from dm_gym.env_conf import assign_env_config
 from dm_gym.utils.data_gen import data_gen_clustering
 
 
-
 class ClusteringEnv_3(gym.Env):
 
     """Custom Environment that follows gym interface"""
@@ -40,8 +39,9 @@ class ClusteringEnv_3(gym.Env):
         self.observation_space = spaces.Box(low=np.array(
             min_val), high=np.array(max_val), dtype=np.float64)
         data_gen = data_gen_clustering()
-        _, self.prototype_centroids = data_gen.gen_model_Kmeans(self.data, self.k)
-        
+        _, self.prototype_centroids = data_gen.gen_model_Kmeans(
+            self.data, self.k)
+
         self.centroids = deepcopy(self.prototype_centroids)
 
     def reset(self):
@@ -73,7 +73,4 @@ class ClusteringEnv_3(gym.Env):
         return obs, reward, done, {'centroids': self.centroids}
 
     def render(self, mode='human', close=False):
-
         print('Step: ', self.current_step)
-        print('Current reward: ', self.R.reward_function(
-            self.final_state_data, self.k, self.total_data_size))

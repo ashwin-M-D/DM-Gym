@@ -14,6 +14,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.cluster import MeanShift
 from sklearn.cluster import KMeans
 
+from sklearn.linear_model import LogisticRegression
+
 
 class data_gen_clustering():
 
@@ -27,7 +29,7 @@ class data_gen_clustering():
         if(n <= 0):
             error_code = 1
             error = "number of features has to be greater than or equal to 1"
-        
+
         elif(k <= 0):
             error_code = 6
             error = "number of clusters has to be greater than or equal to 1"
@@ -35,7 +37,7 @@ class data_gen_clustering():
         elif(len(parameter_means) > 0 and len(parameter_means) != n):
             error_code = 2
             error = "parameters means specified are not of correct length"
-            
+
         elif(len(parameter_means) > 0 and len(parameter_means[0]) != k):
             error_code = 3
             error = "parameters means specified are not of correct length"
@@ -70,21 +72,22 @@ class data_gen_clustering():
         return error, error_code, self.parameter_means, self.parameter_sd
 
     def gen_data(self):
-            
+
         final_data = []
-        
+
         for i in range(self.k):
             temp_data = []
             for j in range(self.n):
-                data = np.random.normal(self.parameter_means[j][i], self.parameter_sd[j][i], int(self.num_records/self.k))
+                data = np.random.normal(
+                    self.parameter_means[j][i], self.parameter_sd[j][i], int(self.num_records/self.k))
                 temp_data.append(data)
-            final_data = final_data + np.transpose(np.array(temp_data)).tolist()
-        
-        columns = list(range(1,self.n+1))
+            final_data = final_data + \
+                np.transpose(np.array(temp_data)).tolist()
+
+        columns = list(range(1, self.n+1))
         self.df = pd.DataFrame(data=final_data, columns=columns)
 
         return self.df
-    
 
     def gen_model(self, data):
 
@@ -93,18 +96,18 @@ class data_gen_clustering():
         model = MeanShift(bandwidth=2)
 
         reg = model.fit(X)
-        
+
         model_labels = reg.labels_
-        
+
         final_data = deepcopy(data)
         final_data['Class'] = model_labels
-        
+
         centroids = model.cluster_centers_
-        
+
         centroids = [tuple(coords) for coords in centroids]
-            
+
         return final_data, centroids
-    
+
     def gen_model_Kmeans(self, data, k=2):
 
         X = data.to_numpy()
@@ -114,18 +117,121 @@ class data_gen_clustering():
             model = KMeans(n_clusters=k)
 
         reg = model.fit(X)
-        
+
         model_labels = reg.labels_
-        
+
         final_data = deepcopy(data)
         final_data['Class'] = model_labels
-        
+
         centroids = model.cluster_centers_
-        
+
         centroids = [tuple(coords) for coords in centroids]
-            
+
         return final_data, centroids
-    
+
+
+class data_gen_classification():
+
+    def __init__(self):
+        pass
+
+    def param_init(self, n, k, num_records, parameter_means=[], parameter_sd=[]):
+        error = ""
+        error_code = 0
+
+        if(n <= 0):
+            error_code = 1
+            error = "number of features has to be greater than or equal to 1"
+
+        elif(k <= 0):
+            error_code = 6
+            error = "number of clusters has to be greater than or equal to 1"
+
+        elif(len(parameter_means) > 0 and len(parameter_means) != n):
+            error_code = 2
+            error = "parameters means specified are not of correct length"
+
+        elif(len(parameter_means) > 0 and len(parameter_means[0]) != k):
+            error_code = 3
+            error = "parameters means specified are not of correct length"
+
+        elif(len(parameter_sd) > 0 and len(parameter_sd) != n):
+            error_code = 4
+            error = "parameters std deviation specified are not of correct length"
+
+        elif(len(parameter_sd) > 0 and len(parameter_sd[0]) != k):
+            error_code = 5
+            error = "parameters std deviation specified are not of correct length"
+
+        if(error_code == 0):
+            self.n = n
+            self.k = k
+            self.num_records = num_records
+
+            if(len(parameter_means) == n):
+                self.parameter_means = parameter_means
+            else:
+                self.parameter_means = []
+                for i in range(n):
+                    l = (np.arange(k) * k).tolist()
+                    np.random.shuffle(l)
+                    self.parameter_means.append(l)
+
+            if(len(parameter_sd) == n):
+                self.parameter_sd = parameter_sd
+            else:
+                self.parameter_sd = (np.ones((n, k))).tolist()
+
+        return error, error_code, self.parameter_means, self.parameter_sd
+
+    def gen_data(self):
+
+        final_data = []
+
+        for i in range(self.k):
+            temp_data = []
+            for j in range(self.n):
+                data = np.random.normal(
+                    self.parameter_means[j][i], self.parameter_sd[j][i], int(self.num_records/self.k))
+                temp_data.append(data)
+            final_data = final_data + \
+                np.transpose(np.array(temp_data)).tolist()
+
+        columns = list(range(1, self.n+1))
+        self.df = pd.DataFrame(data=final_data, columns=columns)
+
+        data = self.gen_target(self.df, self.k)
+
+        return self.df, list(data['Class'])
+
+    def gen_target(self, data, k=2):
+
+        X = data.to_numpy()
+        try:
+            model = KMeans(n_clusters=self.k)
+        except:
+            model = KMeans(n_clusters=k)
+
+        reg = model.fit(X)
+
+        model_labels = reg.labels_
+
+        final_data = deepcopy(data)
+        final_data['Class'] = model_labels
+
+        return final_data
+
+    def gen_model(self, data, target):
+
+        clf = LogisticRegression()
+        clf.fit(data, target)
+        final_data = deepcopy(data)
+        final_data['target'] = target
+        final_data['prediction'] = clf.predict(data)
+
+        return final_data, clf.score(data, target), clf
+
+
 class data_gen_LR():
 
     def __init__(self):
@@ -176,7 +282,7 @@ class data_gen_LR():
             else:
                 self.parameter_sd = (np.ones(n)).tolist()
 
-        return error, error_code
+        return error, error_code, self.parameter_means, self.parameter_sd
 
     def gen_features(self):
 

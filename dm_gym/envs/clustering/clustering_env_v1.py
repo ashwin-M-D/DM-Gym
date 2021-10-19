@@ -81,7 +81,4 @@ class ClusteringEnv_1(gym.Env):
         return obs, reward, done, {'final_state_data': self.final_state_data, 'accuracy': accuracy}
 
     def render(self, mode='human', close=False):
-
         print('Step: ', self.current_step)
-        print('Current reward, accuracy: ', self.R.reward_function(
-            self.final_state_data, self.k, self.total_data_size))

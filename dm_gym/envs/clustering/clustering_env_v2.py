@@ -42,13 +42,12 @@ class ClusteringEnv_2(gym.Env):
 
         self.observation_space = spaces.Box(low=np.array(
             min_val), high=np.array(max_val), dtype=np.float64)
-        
+
         self.prototype_centroids = []
         for i in range(self.k):
             self.prototype_centroids.append(self.observation_space.sample())
         #self.prototype_centroids = self.data.sample(n=self.k).values.tolist()
 
-        
         self.centroids = deepcopy(self.prototype_centroids)
 
     def reset(self):
@@ -67,7 +66,8 @@ class ClusteringEnv_2(gym.Env):
     def _update_env(self, action, y_i, p_i):
         # Update Centroids
         self.centroids[action] = self.centroids[action] + \
-            self.lr * abs(y_i - p_i) * (np.array(self.prev_obs) - np.array(self.centroids[action]))
+            self.lr * abs(y_i - p_i) * (np.array(self.prev_obs) -
+                                        np.array(self.centroids[action]))
 
     def step(self, action):
 
@@ -79,7 +79,8 @@ class ClusteringEnv_2(gym.Env):
         else:
             done = False
 
-        reward, y_i, p_i = self.R.reward_function(self.prev_obs, action, self.centroids)
+        reward, y_i, p_i = self.R.reward_function(
+            self.prev_obs, action, self.centroids)
 
         self._update_env(action, y_i, p_i)
         obs = self.data_env.sample().values.tolist()[0]
@@ -89,7 +90,4 @@ class ClusteringEnv_2(gym.Env):
         return obs, reward, done, {'centroids': self.centroids}
 
     def render(self, mode='human', close=False):
-
         print('Step: ', self.current_step)
-        print('Current reward: ', self.R.reward_function(
-            self.final_state_data, self.k, self.total_data_size))

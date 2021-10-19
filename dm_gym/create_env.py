@@ -1,5 +1,6 @@
 import dm_gym
 
+
 def ray_create_env(config, *args, **kwargs):
 
     if type(config) == dict:
@@ -14,6 +15,8 @@ def ray_create_env(config, *args, **kwargs):
         from dm_gym.envs.clustering.clustering_env_v2 import ClusteringEnv_2 as env
     elif env_name == 'clustering-v3':
         from dm_gym.envs.clustering.clustering_env_v3 import ClusteringEnv_3 as env
+    elif env_name == 'classification-v0':
+        from dm_gym.envs.classification.classification_env_v0 import ClassificationEnv_0 as env
     else:
         raise NotImplementedError(
             'Environment {} not recognized.'.format(env_name))
@@ -29,6 +32,8 @@ def create_env(name, *args, **kwargs):
         env = dm_gym.make("dm_gym:clustering-v2", **kwargs)
     elif name == "clustering-v3":
         env = dm_gym.make("dm_gym:clustering-v3", **kwargs)
+    elif name == "classification-v0":
+        env = dm_gym.make("dm_gym:classification-v0", **kwargs)
     else:
         raise NotImplementedError(
             'Environment {} not recognized.'.format(name))
