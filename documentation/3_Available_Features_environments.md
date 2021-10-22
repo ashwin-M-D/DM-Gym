@@ -1,4 +1,4 @@
-# DM-Gym: Available Features - Data Management
+# DM-Gym: Available Features - Environments
 
 The package's features for data management have been explained. Now we explain environment creation for running your RL algorithm.
 
