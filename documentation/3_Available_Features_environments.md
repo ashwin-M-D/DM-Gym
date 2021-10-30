@@ -1,4 +1,4 @@
-# DM-Gym: Available Features - Data Management
+# DM-Gym: Available Features - Environments
 
 The package's features for data management have been explained. Now we explain environment creation for running your RL algorithm.
 
@@ -6,7 +6,7 @@ The package's features for data management have been explained. Now we explain e
 
 The following environments are OpenAI gym compliant. They are completely integrated with the structure specified by OpenAI's gym.
 
-The package has also ensured that the environments can be created in such a way that prebuilt RL libraries such as ray.rllib and ray.tune con run seamlessly with it. How to setup such an environment is explained below.
+The package has also ensured that the environments can be created in such a way that prebuilt RL libraries such as ray.rllib and ray.tune can run seamlessly with it. The process to setup such an environment is explained below.
 
 ## Available Environments
 
@@ -36,9 +36,9 @@ env = create_env(env_name, env_config=env_config)
 
 The returned object is the environment object. This is what interacts with your RL algorithm.
 
-## Environments with Ray/rllib or Ray/Tune
+## Environments with Ray-rllib or Ray-Tune
 
-Ray cannot use the above environment object creation method therefore you will need to add in a function into your project as follows
+Ray cannot use the above environment object creation method therefore you will need to add in a function into your project as follows:
 
 ```python
 import ray

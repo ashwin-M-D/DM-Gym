@@ -4,7 +4,7 @@
 
 ### Environment config
 
-The environment config looks like so:
+The environment config looks so:
 
 ```python
 env_name = "classification-v0"
@@ -20,7 +20,7 @@ The parameters are self explanatory.
 
 ### Environment Variables
 
-The major environment variables are the following
+The major environment variables are the following:
 
 ```python
 ## env is the environment object

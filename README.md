@@ -1,12 +1,12 @@
 # DM-Gym
 
-Data Mining Gym Environment for Reinforcement Learning
+Data Mining Gym Environment for Reinforcement Learning ("RL")
 
 ### Installation
 
 You can download the git repository directly and keep the dm_gym folder inside your project folder.
 
-You could also use the following steps to install DM-Gym in your system to be accessible anywhere:
+You could also use the following steps to install DM-Gym, which can be accessed anywhere in the system:
 
 ```bash
 git clone https://github.com/ashwin-M-D/DM-Gym.git
@@ -59,7 +59,7 @@ cd experiments
 
      ![Reward Function for Clustering-v1](./images/clustering_v1.png)
 
-     This performs better than clustering-v0. However, it is suggested to use one of the other 2 clustering environments. 
+     This performs better than clustering-v0. However, it is suggested to use one of the other two clustering environments mentioned below:
    
    - clustering-v2: Uses a different reward system which is either p-1 or p at each step. Based on the paper "A Reinforcement Learning Approach to Online Clustering" [1]. Please use a low gamma value with this environment for optimal results.
    
@@ -69,18 +69,18 @@ cd experiments
 
    Classification is done by reading a single record at a time and checking the output of your RL agent against the class it belongs to.
 
-   * classification-v0: This has very good performance and the reward function is defined as 1 if the output of the agent and the class it actually belongs to match and -1 if they don't match. It is again recommended to use a low gamma value for this environment.
+   * classification-v0: This has very good performance and the reward function is defined as 1, if the output of the agent and the class it actually belongs to match. It is -1 if they don't match. It is again recommended to use a low gamma value for this environment.
 
 ### Environments planned for the future
 
-2. Linear Regression environments.
+1. Linear Regression environments.
 2. More Classification environments.
 
 #### Notes:
 
-1. **See Testing folder to see examples of each of the environments and their outputs**
+1. **See Testing folder to see examples of each of the environments and their outputs.**
 
-2. **Documentation for all available functions is available in the documentation folder. This folder will be updated regularly to make sure there are no ambiguity in the usage of the environments**
+2. **Documentation for all available functions are provided in the documentation folder. This folder will be updated regularly to make sure there is no ambiguity in the usage of the environments**
 
 ### References
 

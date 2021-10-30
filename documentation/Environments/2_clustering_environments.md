@@ -4,7 +4,7 @@
 
 ### Environment config
 
-The environment config looks like so:
+The environment config looks so:
 
 ```python
 env_name = "clustering-v0"
@@ -19,7 +19,7 @@ The parameters are self explanatory.
 
 ### Environment Variables
 
-The major environment variables are the following
+The major environment variables are the following:
 
 ```python
 ## env is the environment object
@@ -47,7 +47,7 @@ This environment has a reward at each timestep.
 
 ### Environment config
 
-The environment config looks like so:
+The environment config looks so:
 
 ```python
 env_name = "clustering-v1"
@@ -62,7 +62,7 @@ The parameters are self explanatory. It is exactly similar to that of clustering
 
 ### Environment Variables
 
-The major environment variables are the following
+The major environment variables are the following:
 
 ```python
 ## env is the environment object
@@ -84,13 +84,13 @@ The reward function is quite simply defined as follows:
 
 ![Reward Function for Clustering-v1](../../images/clustering_v1.png)
 
-The regularization term is a minute quantity which tries to make sure that no one cluster fully takes over the entire dataset if the clusters are close by. As seen above, this environment has a reward only at the end of each episode.
+The regularization term is a minute quantity which tries to make sure that no one cluster fully takes over the entire dataset if the clusters are close by. This environment has a reward only at the end of each episode.
 
 ## clustering-v2
 
 ### Environment config
 
-The environment config looks like so:
+The environment config looks so:
 
 ```python
 env_name = "clustering-v2"
@@ -107,7 +107,7 @@ The parameters are self explanatory.
 
 ### Environment Variables
 
-The major environment variables are the following
+The major environment variables are the following:
 
 ```python
 ## env is the environment object
@@ -134,7 +134,7 @@ reward = -1 * (1-p)   if yi = 0
 
 ### Environment config
 
-The environment config looks like so:
+The environment config looks so:
 
 ```python
 env_name = "clustering-v3"
@@ -149,7 +149,7 @@ The parameters are self explanatory.
 
 ### Environment Variables
 
-The major environment variables are the following
+The major environment variables are the following:
 
 ```python
 ## env is the environment object

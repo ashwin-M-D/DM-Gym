@@ -2,7 +2,7 @@
 
 After the creation of the environment as explained before, we can now start to use it.
 
-The environment moves as shown below
+The environment moves as shown below:
 
 ```python
 ## Given environment object env
@@ -19,11 +19,11 @@ loop('''while done = False'''):
     obs, reward, done, info = env.step(action)
 ```
 
-The returned values are explained below:
+The returned values are explained here:
 
-1. obs: This is just the next observation which is fed into the RL model
-2. reward: This is a measure as to how well the previous action was for that previous state
+1. obs: This is just the next observation which is fed into the RL model.
+2. reward: This is a measure as to how well the previous action was for that state.
 3. done: The environment has reached a terminal state now.
 4. info: is a dictionary but is usually empty. It is mainly used for debugging purposes.
 
-Once done changes from false to true, you can reset the environment as shown above and continue the training process.
+Once "done" changes from false to true, you can reset the environment as shown above and continue the training process.

@@ -4,7 +4,7 @@ The package has a lot of features which include but not limited to creation of e
 
 ## Sample / Synthetic Datasets generation
 
-This feature can be used to randomly generate datasets for the different environments in this package. It is done as follows.
+This feature can be used to randomly generate datasets for the different environments in this package. It is done as follows:
 
 #### Clustering Datasets
 
@@ -19,7 +19,7 @@ datagen.param_init(n=<num_features>, k=<num_clusters>, num_records=<num_records>
                    parameter_means=[], parameter_sd=[])
 ```
 
-The param_init() function returns error, error_code, parameter_means and parameter_sd. This is for debug processes. If there are no errors, the error code is 0 and error is an empty string.
+The param_init() function returns error, error_code, parameter_means and parameter_sd. This is for the debugging processes. If there are no errors, the error code is 0 and error is an empty string.
 
 The parameters are explained below:
 
@@ -30,7 +30,7 @@ The parameters are explained below:
 3. num_records: the number of records required in the dataset //required
 
 4. parameter_means: the mean of the features for each cluster //optional
-   This is basically a 2d-array. Randomly selected of not specified.
+   This is basically a 2d-array. Randomly selected if not specified.
 
 5. parameter_sd: the standard deviation of the features for each cluster //optional
    This is basically a 2d-array. Defaults to all 1 if not specified
@@ -76,7 +76,7 @@ datagen.param_init(n=<num_features>, k=<num_classes>, num_records=<num_records>,
                    parameter_means=[], parameter_sd=[])
 ```
 
-The param_init() function returns error, error_code, parameter_means and parameter_sd. This is for debug processes. If there are no errors, the error code is 0 and error is an empty string.
+The param_init() function returns error, error_code, parameter_means and parameter_sd. This is for the debugging processes. If there are no errors, the error code is 0 and error is an empty string.
 
 The parameters are explained below:
 
@@ -87,7 +87,7 @@ The parameters are explained below:
 3. num_records: the number of records required in the dataset //required
 
 4. parameter_means: the mean of the features for each class //optional
-   This is basically a 2d-array. Randomly selected of not specified.
+   This is basically a 2d-array. Randomly selected if not specified.
 
 5. parameter_sd: the standard deviation of the features for each class //optional
    This is basically a 2d-array. Defaults to all 1 if not specified
@@ -144,7 +144,7 @@ The Outputs are as follows:
 1. final_data: is a dataset which contains the original data along with an additional column called "Class" which contains a label stating which cluster it belongs to.
 2. centroids: is a 2d python list which contains tuples of the centroids of the clusters. The order is the same as the label itself. 
 
-The labels start from 0 to k-1 both inclusive in the case of k means. In case of mean shift algorithm, it is possible that it may identify more or less clusters than the value of k.
+The labels start from 0 to k-1 both inclusive in the case of k-means. In case of mean shift algorithm, it is possible that it may identify more or less clusters than the value of k.
 
 #### For Classification
 
